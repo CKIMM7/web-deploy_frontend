@@ -1,8 +1,9 @@
 import React, { useEffect } from "react"
-
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from './store/store';
 import { auth } from "./firebase";
+
+import axios from 'axios'
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,12 @@ function App() {
 
   useEffect(() => {
     if(user) {console.log('cb: bring data from backend')
+
+    axios.get('https://web-dev-deploy.herokuapp.com/')
+  .then((r) => {
+    console.log(r);
+
+  });
   } else {
     console.log('cb: user has signed out do something')
   }

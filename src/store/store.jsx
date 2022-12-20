@@ -18,7 +18,6 @@ const userSlice = createSlice({
 
         setUser(state, action) {
             state.user = action.payload
-            console.log(state.user)    
         },
         
         signOut() {

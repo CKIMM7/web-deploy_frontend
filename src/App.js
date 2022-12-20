@@ -6,6 +6,7 @@ import { auth } from "./firebase";
 import axios from 'axios'
 
 function App() {
+
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
 
@@ -28,8 +29,8 @@ function App() {
         displayName: user.displayName,
         email: user.email,
         emailVerified: user.emailVerified,
-        photoURL: user.photoURL,
-        uid: user.uid
+        photo: user.photoURL,
+        guid: user.uid
       }
       //console.log(user1)
       dispatch(userActions.setUser(user1))
@@ -43,15 +44,26 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if(user) {console.log('cb: bring data from backend')
 
-    axios.get('https://web-dev-deploy.herokuapp.com/')
+    if(user) {
+
+    console.log('send this data')
+    console.log(user)
+
+    console.log('cb: bring data from backend')
+    //axios.get('https://web-dev-deploy.herokuapp.com/')
+
+    axios.post('https://web-dev-deploy.herokuapp.com/user', {
+      data: user
+    })
+
   .then((r) => {
     console.log(r);
 
+
   });
   } else {
-    console.log('cb: user has signed out do something')
+    console.log('cb: user has signed out, do something')
   }
 
   }, [user])
@@ -60,7 +72,7 @@ function App() {
   return (
     <div>
       {user ? <div><p>user: {user.uid}</p>
-              <img src={user.photoURL}></img>
+              <img src={user.photo}></img>
               </div> 
       : <p>user is not signed in</p>}
       <button onClick={signInHandler}>sign in with google</button>

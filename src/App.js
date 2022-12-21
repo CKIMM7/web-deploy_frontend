@@ -19,37 +19,36 @@ function App() {
   }
 
   const createAwsUser = () => {
-    axios.post('http://127.0.0.1:5000/iam/new', {
+    axios.post(`${process.env.REACT_APP_URL}/iam/new`, {
         name: user.name,
         guid: user.guid
       })
   }
 
   const ec2launchHandler = () => {
-    axios.post('http://127.0.0.1:5000/ec2/create', {
+    axios.post(`${process.env.REACT_APP_URL}/ec2/create`, {
       name: user.name,
       guid: user.guid
     })
   }
 
   const ec2StopHandler = () => {
-    axios.post('http://127.0.0.1:5000/ec2/stop', {
+    axios.post(`${process.env.REACT_APP_URL}/ec2/stop`, {
       name: user.name,
       guid: user.guid
     })
   }
 
   const ec2StartHandler = () => {
-    axios.post('http://127.0.0.1:5000/ec2/start', {
+    axios.post(`${process.env.REACT_APP_URL}/ec2/start`, {
       name: user.name,
       guid: user.guid
     })
   }
 
 
-
   const viewYourServers = () => {
-    axios.post('http://127.0.0.1:5000/ec2/instances', {
+    axios.post(`${process.env.REACT_APP_URL}/ec2/instances`, {
       name: user.name,
       guid: user.guid
     }).then((s) => {
@@ -76,7 +75,7 @@ function App() {
         guid: user.uid
       }
       //console.log(user1)
-      axios.post('http://127.0.0.1:5000/user', {
+      axios.post(`${process.env.REACT_APP_URL}/user`, {
         data: user1
       })
       .then((user) => {
@@ -99,7 +98,6 @@ function App() {
     return unsubscribe
   }, [])
 
-
   return (
     <div>
       {user ? <div><p>user: {user.uid}</p>
@@ -117,6 +115,7 @@ function App() {
       {user.id && <button onClick={ec2StartHandler}>start EC2 instance</button>}
 
       {user.id && <button onClick={viewYourServers}>view your servers</button>}
+      <p>{process.env.REACT_APP_WEBSITE_NAME}</p>
     </div>
   );
 }

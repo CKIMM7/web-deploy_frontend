@@ -18,6 +18,49 @@ function App() {
     dispatch(userActions.signOut())
   }
 
+  const createAwsUser = () => {
+    axios.post('http://127.0.0.1:5000/iam/new', {
+        name: user.name,
+        guid: user.guid
+      })
+  }
+
+  const ec2launchHandler = () => {
+    axios.post('http://127.0.0.1:5000/ec2/create', {
+      name: user.name,
+      guid: user.guid
+    })
+  }
+
+  const ec2StopHandler = () => {
+    axios.post('http://127.0.0.1:5000/ec2/stop', {
+      name: user.name,
+      guid: user.guid
+    })
+  }
+
+  const ec2StartHandler = () => {
+    axios.post('http://127.0.0.1:5000/ec2/start', {
+      name: user.name,
+      guid: user.guid
+    })
+  }
+
+
+
+  const viewYourServers = () => {
+    axios.post('http://127.0.0.1:5000/ec2/instances', {
+      name: user.name,
+      guid: user.guid
+    }).then((s) => {
+      console.log(s)
+
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
+
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       //console.log(user)
@@ -33,8 +76,21 @@ function App() {
         guid: user.uid
       }
       //console.log(user1)
-      dispatch(userActions.setUser(user1))
+      axios.post('http://127.0.0.1:5000/user', {
+        data: user1
+      })
+      .then((user) => {
+        console.log(user);
+        dispatch(userActions.setUser(user.data))
+    
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+
+
     } else {
+      console.log('no user')
       dispatch(userActions.setUser(''))
     }
 
@@ -42,31 +98,6 @@ function App() {
 
     return unsubscribe
   }, [])
-
-  useEffect(() => {
-
-    if(user) {
-
-    console.log('send this data')
-    console.log(user)
-
-    console.log('cb: bring data from backend')
-    //axios.get('https://web-dev-deploy.herokuapp.com/')
-
-    axios.post('https://web-dev-deploy.herokuapp.com/user', {
-      data: user
-    })
-
-  .then((r) => {
-    console.log(r);
-
-
-  });
-  } else {
-    console.log('cb: user has signed out, do something')
-  }
-
-  }, [user])
 
 
   return (
@@ -77,6 +108,15 @@ function App() {
       : <p>user is not signed in</p>}
       <button onClick={signInHandler}>sign in with google</button>
       <button onClick={signOutHandler}>sign out</button>
+      {user.id && <button onClick={createAwsUser}>create aws user</button>}
+      
+      {user.id && <button onClick={ec2launchHandler}>launch EC2 instance</button>}
+
+      {user.id && <button onClick={ec2StopHandler}>stop EC2 instance</button>}
+
+      {user.id && <button onClick={ec2StartHandler}>start EC2 instance</button>}
+
+      {user.id && <button onClick={viewYourServers}>view your servers</button>}
     </div>
   );
 }

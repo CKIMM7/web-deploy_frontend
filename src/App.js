@@ -115,7 +115,7 @@ function App() {
       {user.id && <button onClick={ec2StartHandler}>start EC2 instance</button>}
 
       {user.id && <button onClick={viewYourServers}>view your servers</button>}
-      <p>{process.env.REACT_APP_WEBSITE_NAME}</p>
+      <p>{process.env.REACT_APP_URL}</p>
     </div>
   );
 }

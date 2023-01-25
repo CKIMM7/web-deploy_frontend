@@ -12,13 +12,26 @@ const userSlice = createSlice({
         user: '',
         iAmId: '',
         instanceId: '',
+        error: ''
     },
 
     reducers: {
 
+        setError(state, action) {
+            state.error = action.payload
+        },
+
         setUser(state, action) {
             console.log(action.payload)
             state.user = action.payload
+
+
+
+        },
+
+        setIamUser(state, action) {
+            state.user.accessId = action.payload.accessId
+            state.user.secretId = action.payload.secretId
         },
         
         signOut() {

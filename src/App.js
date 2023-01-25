@@ -9,6 +9,7 @@ function App() {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
+  const error = useSelector(state => state.user.error);
 
   const signInHandler = () => {
     dispatch(userActions.googleSignIn())
@@ -18,10 +19,25 @@ function App() {
     dispatch(userActions.signOut())
   }
 
+  const resetErrorMsg = () => {
+    console.log('settime')
+  }
+
   const createAwsUser = () => {
     axios.post(`${process.env.REACT_APP_URL}/iam/new`, {
         name: user.name,
         guid: user.guid
+      }).then((s) => {
+        console.log(s)
+        dispatch(userActions.setIamUser(s.data.userData))
+      }).catch((e) => {
+        console.log(e)
+
+        dispatch(userActions.setError(e.response.data.message))
+        setTimeout(function(){
+        dispatch(userActions.setError(''))
+        }, 3000); 
+
       })
   }
 
@@ -98,9 +114,10 @@ function App() {
     return unsubscribe
   }, [])
 
+
   return (
     <div>
-      {user ? <div><p>user: {user.uid}</p>
+      {user ? <div><p>user: {user.email}</p>
               <img src={user.photo}></img>
               </div> 
       : <p>user is not signed in</p>}
@@ -115,6 +132,12 @@ function App() {
       {user.id && <button onClick={ec2StartHandler}>start EC2 instance</button>}
 
       {user.id && <button onClick={viewYourServers}>view your servers</button>}
+
+      {user.access_id && <p>{user.access_id}</p>}
+      {user.secret_id && <p>{user.secret_id}</p>}
+
+      {error && <p>{error}</p>}
+
       <p>{process.env.REACT_APP_URL}</p>
     </div>
   );

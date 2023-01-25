@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from './store/store';
 import { auth } from "./firebase";
 
+import Repos from "./pages/Repos";
+import Form from "./pages/Form";
+
 import axios from 'axios'
 
 function App() {
@@ -142,8 +145,12 @@ function App() {
       {/* {user.access_id && <p>{user.access_id}</p>}
       {user.secret_id && <p>{user.secret_id}</p>} */}
 
-      {error && <p>{error}</p>}
+      <div className="repos">
+        <Form></Form>
+        <Repos></Repos>
+      </div>
 
+      {error && <p>{error}</p>}
       <p>{process.env.REACT_APP_URL}</p>
     </div>
   );

@@ -18,3 +18,35 @@
   font-size: 20px;
 }
 
+#searchForm {
+  border: 3px solid white;
+  width: 100%;
+  text-align: center;
+  background-color: black;
+}
+
+
+#form-search {
+  margin: 1rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 3px solid white;
+
+  width: 75%;
+  height: 30px;
+  font-size: 25px;
+  border-radius: 10px;
+}
+
+#loading {
+  position: absolute;
+  z-index: 1000;
+  top: 300px;
+}
+
+#img{
+  display: table;
+  margin: 0 auto;
+}

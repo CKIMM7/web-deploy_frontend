@@ -12,10 +12,37 @@ const userSlice = createSlice({
         user: '',
         iAmId: '',
         instanceId: '',
-        error: ''
+        error: '',
+
+        searchArray: [],
+        searchValue: '',
+        textInput: '',
+
+        isLoading: false,
+        isError: false
     },
 
     reducers: {
+
+        setTextInput(state, action) {
+            state.textInput = action.payload
+        },
+
+        setSearchValue(state, action) {
+            state.searchArray = action.payload
+        },
+
+        setIsError(state, action) {
+            state.isError = action.payload
+        },
+
+        setSearchArray(state, action) {
+            state.searchArray = action.payload
+        },
+
+        setIsLoading(state, action) {
+            state.isLoading = action.payload
+        },
 
         setError(state, action) {
             state.error = action.payload
@@ -24,8 +51,6 @@ const userSlice = createSlice({
         setUser(state, action) {
             console.log(action.payload)
             state.user = action.payload
-
-
 
         },
 

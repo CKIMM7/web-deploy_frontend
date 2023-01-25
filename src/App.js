@@ -19,10 +19,6 @@ function App() {
     dispatch(userActions.signOut())
   }
 
-  const resetErrorMsg = () => {
-    console.log('settime')
-  }
-
   const createAwsUser = () => {
     axios.post(`${process.env.REACT_APP_URL}/iam/new`, {
         name: user.name,
@@ -30,6 +26,7 @@ function App() {
       }).then((s) => {
         console.log(s)
         dispatch(userActions.setIamUser(s.data.userData))
+
       }).catch((e) => {
         console.log(e)
 
@@ -45,6 +42,11 @@ function App() {
     axios.post(`${process.env.REACT_APP_URL}/ec2/create`, {
       name: user.name,
       guid: user.guid
+    }).then((s) => {
+      console.log(s)
+
+    }).catch((e) => {
+      console.log(e)
     })
   }
 
@@ -115,17 +117,20 @@ function App() {
   }, [])
 
 
+
+
   return (
     <div>
       <div className='auth-container'>
-      {user ? <div><p className='auth'>user: {user.email}</p>
+      {user ? <div><p className='auth'>Hello {user.email}</p>
               <img src={user.photo}></img>
               </div> 
-      : <p className='auth'>user is not signed in</p>}
-      <button onClick={signInHandler} className='auth'>sign in with google</button>
+      : <button onClick={signInHandler} className='auth'>sign in with Google</button>}
       <button onClick={signOutHandler} className='auth'>sign out</button>
       {user.id && <button onClick={createAwsUser} className='auth'>create aws user</button>}
-      </div>
+      {user.access_id ? <p>Access Id: {user.access_id}</p> : <p>No userAccessId</p>}
+      {user.secret_id ? <p>Secret Id: {user.secret_id}</p> : <p>No userSecretId</p>}
+    </div>
 
       <div className='ec2-container'>
         {user.id && <button onClick={ec2launchHandler} className='ec2'>launch EC2 instance</button>}
@@ -134,8 +139,8 @@ function App() {
         {user.id && <button onClick={viewYourServers} className='ec2'>view your servers</button>}
       </div>
 
-      {user.access_id && <p>{user.access_id}</p>}
-      {user.secret_id && <p>{user.secret_id}</p>}
+      {/* {user.access_id && <p>{user.access_id}</p>}
+      {user.secret_id && <p>{user.secret_id}</p>} */}
 
       {error && <p>{error}</p>}
 

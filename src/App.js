@@ -117,21 +117,22 @@ function App() {
 
   return (
     <div>
-      {user ? <div><p>user: {user.email}</p>
+      <div className='auth-container'>
+      {user ? <div><p className='auth'>user: {user.email}</p>
               <img src={user.photo}></img>
               </div> 
-      : <p>user is not signed in</p>}
-      <button onClick={signInHandler}>sign in with google</button>
-      <button onClick={signOutHandler}>sign out</button>
-      {user.id && <button onClick={createAwsUser}>create aws user</button>}
-      
-      {user.id && <button onClick={ec2launchHandler}>launch EC2 instance</button>}
+      : <p className='auth'>user is not signed in</p>}
+      <button onClick={signInHandler} className='auth'>sign in with google</button>
+      <button onClick={signOutHandler} className='auth'>sign out</button>
+      {user.id && <button onClick={createAwsUser} className='auth'>create aws user</button>}
+      </div>
 
-      {user.id && <button onClick={ec2StopHandler}>stop EC2 instance</button>}
-
-      {user.id && <button onClick={ec2StartHandler}>start EC2 instance</button>}
-
-      {user.id && <button onClick={viewYourServers}>view your servers</button>}
+      <div className='ec2-container'>
+        {user.id && <button onClick={ec2launchHandler} className='ec2'>launch EC2 instance</button>}
+        {user.id && <button onClick={ec2StopHandler} className='ec2'>stop EC2 instance</button>}
+        {user.id && <button onClick={ec2StartHandler} className='ec2'>start EC2 instance</button>}
+        {user.id && <button onClick={viewYourServers} className='ec2'>view your servers</button>}
+      </div>
 
       {user.access_id && <p>{user.access_id}</p>}
       {user.secret_id && <p>{user.secret_id}</p>}

@@ -145,10 +145,10 @@ function App() {
       {/* {user.access_id && <p>{user.access_id}</p>}
       {user.secret_id && <p>{user.secret_id}</p>} */}
 
-      <div className="repos">
+      {user.access_id && <div className="repos">
         <Form></Form>
         <Repos></Repos>
-      </div>
+      </div>}
 
       {error && <p>{error}</p>}
       <p>{process.env.REACT_APP_URL}</p>

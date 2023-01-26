@@ -158,6 +158,13 @@ function App() {
 
       {/* {user.access_id && <p>{user.access_id}</p>}
       {user.secret_id && <p>{user.secret_id}</p>} */}
+      {user.instance_id && 
+      <div className='instances-container'>
+        <div className='instance'>
+          <p>Instance ID: {user.instance_id}</p>
+        </div>
+      </div>}
+
 
       {user.access_id && <div className="repos">
         <Form></Form>

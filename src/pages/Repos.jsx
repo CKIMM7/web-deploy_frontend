@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import useGetRepos from "../API/useGetRepos";
+import { userActions } from "../store/store";
 import LoadingSpinner from "./LoadingSpinner";
 
 import axios from "axios";
@@ -14,6 +15,7 @@ const Repos = () => {
     const searchArray = useSelector(state => state.user.searchArray)
 
     const user = useSelector(state => state.user.user);
+    const dispatch = useDispatch()
 
 
     let displayError =  <>
@@ -29,6 +31,11 @@ const ec2launchHandler = (clone_url) => {
       repo: clone_url
     }).then((s) => {
       console.log(s)
+
+      let newUser = { ...user }
+      newUser.instance_id = s.data.message
+      console.log(newUser)
+      dispatch(userActions.setUser(newUser))
 
     }).catch((e) => {
       console.log(e)

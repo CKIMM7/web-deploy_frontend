@@ -31,7 +31,8 @@ function App() {
 
         let newUser = { ...user }
         newUser.access_id = s.data.userData.accessId
-        newUser.secret_id = s.data.userData.secretId
+        newUser.secret_id = s.data.userData.secreId
+        
         dispatch(userActions.setUser(newUser))
 
       }).catch((e) => {

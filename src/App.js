@@ -5,6 +5,7 @@ import { auth } from "./firebase";
 
 import Repos from "./pages/Repos";
 import Form from "./pages/Form";
+import Instances from "./pages/Instances"
 
 import axios from 'axios'
 
@@ -91,18 +92,6 @@ function App() {
     })
   }
 
-  const getEc2InstanceState = () => {
-    axios.post(`${process.env.REACT_APP_URL}/ec2/state`, {
-      name: user.name,
-      guid: user.guid
-    }).then((s) => {
-      console.log(s)
-
-    }).catch((e) => {
-      console.log(e)
-    })
-  }
-
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -171,15 +160,11 @@ function App() {
 
       {/* {user.access_id && <p>{user.access_id}</p>}
       {user.secret_id && <p>{user.secret_id}</p>} */}
-      {user.instance_id && 
-      <div className='instances-container'>
-        <div className='instance'>
-          <p onClick={() => { getEc2InstanceState() }}>Instance ID: {user.instance_id}</p>
-        </div>
-      </div>}
+      
+      {user.instance_id && <Instances></Instances>}
 
-
-      {user.access_id && <div className="repos">
+      {user.access_id && 
+      <div className="repos">
         <Form></Form>
         <Repos></Repos>
       </div>}

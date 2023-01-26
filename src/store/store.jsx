@@ -12,6 +12,7 @@ const userSlice = createSlice({
         user: '',
         iAmId: '',
         instanceId: '',
+        instanceState: '',
         error: '',
 
         searchArray: [],
@@ -23,6 +24,11 @@ const userSlice = createSlice({
     },
 
     reducers: {
+
+        setInstanceState(state, action) {
+            console.log(action.payload)
+            state.instanceState = action.payload
+        },
 
         setTextInput(state, action) {
             state.textInput = action.payload

@@ -20,7 +20,7 @@ const useGetRepos = () => {
 
         function callGitHub () {
 
-        axios.get(`https://api.github.com/users/ckimm7/repos`)
+        axios.get(`https://api.github.com/users/${textInput}/repos`)
         .then(data => { 
             
             console.log(data)

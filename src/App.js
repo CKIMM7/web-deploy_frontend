@@ -28,7 +28,11 @@ function App() {
         guid: user.guid
       }).then((s) => {
         console.log(s)
-        dispatch(userActions.setIamUser(s.data.userData))
+
+        let newUser = { ...user }
+        newUser.access_id = s.data.userData.accessId
+        newUser.secret_id = s.data.userData.secretId
+        dispatch(userActions.setUser(newUser))
 
       }).catch((e) => {
         console.log(e)
@@ -67,6 +71,12 @@ function App() {
     })
   }
 
+  const ec2TerminateHandler = () => {
+    axios.post(`${process.env.REACT_APP_URL}/ec2/terminate`, {
+      name: user.name,
+      guid: user.guid
+    })
+  }
 
   const viewYourServers = () => {
     axios.post(`${process.env.REACT_APP_URL}/ec2/instances`, {
@@ -136,10 +146,14 @@ function App() {
     </div>
 
       <div className='ec2-container'>
-        {user.id && <button onClick={ec2launchHandler} className='ec2'>launch EC2 instance</button>}
-        {user.id && <button onClick={ec2StopHandler} className='ec2'>stop EC2 instance</button>}
-        {user.id && <button onClick={ec2StartHandler} className='ec2'>start EC2 instance</button>}
-        {user.id && <button onClick={viewYourServers} className='ec2'>view your servers</button>}
+        {user.id && <button onClick={ec2launchHandler} className='ec2'>Launch EC2 instance</button>}
+        {user.id && <button onClick={ec2StopHandler} className='ec2'>Stop EC2 instance</button>}
+        
+        {user.id && <button onClick={ec2StartHandler} className='ec2'>Start EC2 instance</button>}
+
+        {user.id && <button onClick={ec2TerminateHandler} className='ec2'>Terminate EC2 instance</button>}
+
+        {user.id && <button onClick={viewYourServers} className='ec2'>View your servers</button>}
       </div>
 
       {/* {user.access_id && <p>{user.access_id}</p>}

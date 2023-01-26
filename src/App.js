@@ -90,6 +90,18 @@ function App() {
     })
   }
 
+  const getEc2InstanceState = () => {
+    axios.post(`${process.env.REACT_APP_URL}/ec2/state`, {
+      name: user.name,
+      guid: user.guid
+    }).then((s) => {
+      console.log(s)
+
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
+
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -161,7 +173,7 @@ function App() {
       {user.instance_id && 
       <div className='instances-container'>
         <div className='instance'>
-          <p>Instance ID: {user.instance_id}</p>
+          <p onClick={() => { getEc2InstanceState() }}>Instance ID: {user.instance_id}</p>
         </div>
       </div>}
 

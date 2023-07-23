@@ -5,6 +5,7 @@ import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux';
 
 const googleProvider = new GoogleAuthProvider();
+// googleProvider.addScope('https://www.googleapis.com/auth/cloud-platform');
 
 const userSlice = createSlice({
     name: 'user',
@@ -73,14 +74,18 @@ const userSlice = createSlice({
             console.log('googleSignin')
             signInWithPopup(auth, googleProvider)
             .then((result) => {
+            
               // This gives you a Google Access Token. You can use it to access the Google API.
               const credential = GoogleAuthProvider.credentialFromResult(result);
               const token = credential.accessToken;
+              console.log('sign-in successful')
+              console.log(token)
               // The signed-in user info.
               const user = result.user;
 
               // ...
             }).catch((error) => {
+            console.log('error')
               // Handle Errors here.
               const errorCode = error.code;
               const errorMessage = error.message;

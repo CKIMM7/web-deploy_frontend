@@ -9,11 +9,15 @@ import Instances from "./pages/Instances"
 
 import axios from 'axios'
 
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+}
+
 function App() {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
-  const error = useSelector(state => state.user.error);
+  const error = useSelector(state => state.user.error); 
 
   const signInHandler = () => {
     dispatch(userActions.googleSignIn())
@@ -31,9 +35,9 @@ function App() {
         console.log(s)
 
         let newUser = { ...user }
-        newUser.access_id = s.data.userData.accessId
-        newUser.secret_id = s.data.userData.secreId
-        
+        newUser.access_id = s.data.user.access_id
+        newUser.secret_id = s.data.user.secret_id
+                
         dispatch(userActions.setUser(newUser))
 
       }).catch((e) => {
@@ -92,10 +96,20 @@ function App() {
     })
   }
 
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_URL}`)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  })
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       //console.log(user)
+      console.log(user)
 
       if(user) {
       
@@ -113,7 +127,8 @@ function App() {
       })
       .then((user) => {
         console.log(user);
-        dispatch(userActions.setUser(user.data))
+        console.log(user.data)
+        dispatch(userActions.setUser(user.data.user))
     
       })
       .catch((e) => {
@@ -130,8 +145,6 @@ function App() {
 
     return unsubscribe
   }, [])
-
-
 
 
   return (

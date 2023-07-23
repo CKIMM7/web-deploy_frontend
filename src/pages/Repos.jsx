@@ -30,10 +30,13 @@ const ec2launchHandler = (clone_url) => {
       guid: user.guid,
       repo: clone_url
     }).then((s) => {
-      console.log(s)
-
+      console.log(s.data.message)
+      let ec2Id = s.data.message
       let newUser = { ...user }
-      newUser.instance_id = s.data.message
+      console.log(newUser)
+
+      console.log(newUser.ec2_instances)
+      
       console.log(newUser)
       dispatch(userActions.setUser(newUser))
 

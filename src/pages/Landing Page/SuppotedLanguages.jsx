@@ -7,10 +7,10 @@ import ruby from "../../assets/icons/ruby.svg"
 
 export default function SupportedLanguages() {
 
-  return <section className={classes.skills} id="skills">
-  <h2 className={classes.skill_header}>supported languages</h2>
-
+  return <section className={classes.section} id="skills">
+  
   <div className={classes.skills_wrapper}>
+  <h2 className={classes.skill_header}>supported languages</h2>
     <div>                        
       <img
         src={node}

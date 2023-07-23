@@ -3,8 +3,9 @@
   justify-content: center;
   margin: auto;
   margin-top: 2.5rem;
-
-  border-bottom: solid 2px black;
+  border-top: solid 2px grey;
+  border-bottom: solid 2px grey;
+  width: 85%;
 }
 
 .about_wrapper {

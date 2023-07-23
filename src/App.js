@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
+import { Routes, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from './store/store';
 import { auth } from "./firebase";
 
-import Repos from "./pages/Repos";
-import Form from "./pages/Form";
-import Instances from "./pages/Instances"
+import Landing from "./pages/Landing Page/Landing";
+import Deployments from "./pages/Deployments";
+import Launch from "./pages/Launch page/Launch";
 
 import axios from 'axios'
 
@@ -51,50 +52,7 @@ function App() {
       })
   }
 
-  const ec2launchHandler = () => {
-    axios.post(`${process.env.REACT_APP_URL}/ec2/create`, {
-      name: user.name,
-      guid: user.guid
-    }).then((s) => {
-      console.log(s)
-
-    }).catch((e) => {
-      console.log(e)
-    })
-  }
-
-  const ec2StopHandler = () => {
-    axios.post(`${process.env.REACT_APP_URL}/ec2/stop`, {
-      name: user.name,
-      guid: user.guid
-    })
-  }
-
-  const ec2StartHandler = () => {
-    axios.post(`${process.env.REACT_APP_URL}/ec2/start`, {
-      name: user.name,
-      guid: user.guid
-    })
-  }
-
-  const ec2TerminateHandler = () => {
-    axios.post(`${process.env.REACT_APP_URL}/ec2/terminate`, {
-      name: user.name,
-      guid: user.guid
-    })
-  }
-
-  const viewYourServers = () => {
-    axios.post(`${process.env.REACT_APP_URL}/ec2/instances`, {
-      name: user.name,
-      guid: user.guid
-    }).then((s) => {
-      console.log(s)
-
-    }).catch((e) => {
-      console.log(e)
-    })
-  }
+  
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_URL}`)
@@ -148,44 +106,28 @@ function App() {
 
 
   return (
-    <div>
-      <div className='auth-container'>
-      {user ? <div><p className='auth'>Hello {user.email}</p>
-              <img src={user.photo}></img>
-              </div> 
-      : <button onClick={signInHandler} className='auth'>sign in with Google</button>}
-      <button onClick={signOutHandler} className='auth'>sign out</button>
-      {user.id && <button onClick={createAwsUser} className='auth'>create aws user</button>}
-      {user.access_id ? <p>Access Id: {user.access_id}</p> : <p>No userAccessId</p>}
-      {user.secret_id ? <p>Secret Id: {user.secret_id}</p> : <p>No userSecretId</p>}
-    </div>
 
-      <div className='ec2-container'>
-        {user.id && <button onClick={ec2launchHandler} className='ec2'>Launch EC2 instance</button>}
-        {user.id && <button onClick={ec2StopHandler} className='ec2'>Stop EC2 instance</button>}
-        
-        {user.id && <button onClick={ec2StartHandler} className='ec2'>Start EC2 instance</button>}
+    // <Routes>
+    // <Route path='/' element={<Header></Header>}>
+    // <Route path='/artist' element={<Artist></Artist>}></Route>
+    // <Route path='/artist' element={<ec2></ec2>}></Route>
+    // </Route>
+    // </Routes>
 
-        {user.id && <button onClick={ec2TerminateHandler} className='ec2'>Terminate EC2 instance</button>}
-
-        {user.id && <button onClick={viewYourServers} className='ec2'>View your servers</button>}
-      </div>
-
-      {/* {user.access_id && <p>{user.access_id}</p>}
-      {user.secret_id && <p>{user.secret_id}</p>} */}
+    <Routes>
+      {/* / */}
+      <Route path='/' element={<Landing></Landing>}></Route>
       
-      {user.instance_id && <Instances></Instances>}
+      {/* /deployments */}
+      <Route path='/deployments' element={<Deployments></Deployments>}></Route>
+      
 
-      {user.access_id && 
-      <div className="repos">
-        <Form></Form>
-        <Repos></Repos>
-      </div>}
-
-      {error && <p>{error}</p>}
-      <p>{process.env.REACT_APP_URL}</p>
-    </div>
+      {/* /launch */}
+      <Route path='/launch' element={<Launch></Launch>}></Route>
+      
+      </Routes>
   );
 }
 
 export default App;
+

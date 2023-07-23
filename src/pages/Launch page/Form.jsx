@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../store/store';
+import { userActions } from '../../store/store';
 
 
 export default function Form() {

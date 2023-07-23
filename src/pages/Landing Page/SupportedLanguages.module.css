@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,700&display=swap');
+
+.skills {
+  margin: auto;
+  text-align: center;
+  margin-top: 2.5rem;
+  border: 2px solid black;
+}
+
+.skill_header {
+  margin-bottom: 1rem;
+
+}
+
+.skills_wrapper {
+  border: 2px solid blue;
+}
+
+.skills_wrapper img {
+  padding: 1.25rem;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  box-shadow: 0 3px 10px #a17a69;
+  margin: 5px;
+  border-radius: 10px;
+
+}
+
+.icon {
+  width: 11.875rem;
+  height: 11.25rem;
+}
+
+.icon-card {
+  background-color: #fff;
+  border-radius: 11px;
+  box-shadow: 0 3px 10px var(--secondary-shadow);
+  padding: 20px;
+  margin: 10px;
+}

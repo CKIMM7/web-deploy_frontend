@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import useGetRepos from "../API/useGetRepos";
-import { userActions } from "../store/store";
-import LoadingSpinner from "./LoadingSpinner";
+import useGetRepos from "../../API/useGetRepos";
+import { userActions } from "../../store/store";
+import LoadingSpinner from "../LoadingSpinner";
 
 import axios from "axios";
 

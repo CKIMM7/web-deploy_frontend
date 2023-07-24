@@ -21,26 +21,14 @@
   border-radius: 30px;
 }
 
-.dropdown_container {
-  position: absolute;
-  top: 40px;
-  right: 0px;
-  width: 100px;
-
-  display: flex;
-  flex-direction: column;
-
-  border: solid 2px red;
+.button_login {
+  margin-right: 20px;
 }
 
-/* .button_login {
-  font-family: "Times New Roman", Times, serif;
-} */
 
 
 
-
-
+  
 
 
 

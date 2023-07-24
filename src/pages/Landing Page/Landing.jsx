@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import Nav from "./Nav";
+import Nav from "../Nav Page/Nav"
 import About from "./About";
 import ExtraFeatures from "./ExtraFeatures";
 import SupportedLanguages from "./SuppotedLanguages";

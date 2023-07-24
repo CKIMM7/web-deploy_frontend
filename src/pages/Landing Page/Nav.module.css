@@ -22,7 +22,15 @@
 }
 
 .dropdown_container {
-  color: red;
+  position: absolute;
+  top: 40px;
+  right: 0px;
+  width: 100px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: solid 2px red;
 }
 
 /* .button_login {

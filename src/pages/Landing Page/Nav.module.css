@@ -1,4 +1,5 @@
-.auth_container {
+.nav_container {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,10 +21,19 @@
   border-radius: 30px;
 }
 
+.dropdown_container {
+  color: red;
+}
 
 /* .button_login {
   font-family: "Times New Roman", Times, serif;
 } */
+
+
+
+
+
+
 
 
 

@@ -5,8 +5,9 @@ import { userActions } from './store/store';
 import { auth } from "./firebase";
 
 import Landing from "./pages/Landing Page/Landing";
-import Deployments from "./pages/Deployments";
 import Launch from "./pages/Launch page/Launch";
+import Deployments from "./pages/Deployments";
+import Account from "./pages/Account Page/Account";
 
 import axios from 'axios'
 
@@ -92,13 +93,18 @@ function App() {
     <Routes>
       {/* / */}
       <Route path='/' element={<Landing></Landing>}></Route>
-      
-      {/* /deployments */}
-      <Route path='/deployments' element={<Deployments></Deployments>}></Route>
-      
 
       {/* /launch */}
       <Route path='/launch' element={<Launch></Launch>}></Route>
+
+      {/* /deployments */}
+      <Route path='/deployments' element={<Deployments></Deployments>}></Route>
+      
+      {/* /deployments */}
+      <Route path='/account' element={<Account></Account>}></Route>
+      
+
+
       
       </Routes>
   );

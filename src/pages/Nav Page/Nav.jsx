@@ -17,6 +17,8 @@ export default function Nav() {
     dispatch(userActions.googleSignIn())
   }
 
+
+
   return <div>
     <div className={classes.nav_container}>
         <h3 className={classes.logo}>WebDeploy</h3>
@@ -25,8 +27,7 @@ export default function Nav() {
           <img 
             src={user.photo} 
             className={classes.profile_img}
-            onMouseEnter={() => setModal(true)}
-            onMouseLeave={() => setModal(false)}>
+            onClick={ () => setModal((current) => !current) }>
             </img>
           {modal && <Modal></Modal>}
         </div> 

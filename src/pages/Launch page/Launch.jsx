@@ -12,7 +12,10 @@ export default function Launch() {
   return <div>
 
       {user.access_id ? 
-      <div className="repos"><Form></Form><Repos></Repos></div>
+      <div className="repos">
+        <Form></Form>
+        <Repos></Repos>
+      </div>
       : 
       <div>
         <p>you currently do not have AWS credentials</p>

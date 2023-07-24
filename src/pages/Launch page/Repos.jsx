@@ -4,6 +4,8 @@ import useGetRepos from "../../API/useGetRepos";
 import { userActions } from "../../store/store";
 import LoadingSpinner from "../LoadingSpinner";
 
+import classes from './Repos.module.css'
+
 import axios from "axios";
 
 const Repos = () => {
@@ -65,7 +67,7 @@ const ec2launchHandler = (clone_url) => {
   let content = searchArray.length === 0 && textInput && !isLoading ? <h1>no repos for this user</h1> :  repos
 
     return(
-        <div>
+        <div className={classes.repos_container}>
             {!textInput && !isLoading && <img src='https://student-server-bucket.s3.amazonaws.com/github_logo.png' /> } 
             {!isError && content}
             {isError && displayError}

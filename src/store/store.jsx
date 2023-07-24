@@ -26,6 +26,16 @@ const userSlice = createSlice({
 
     reducers: {
 
+        setUser(state, action) {
+            console.log(action.payload)
+            state.user = action.payload
+        },
+
+        setIamUser(state, action) {
+            state.user.accessId = action.payload.accessId
+            state.user.secretId = action.payload.secretId
+        },
+
         setInstanceState(state, action) {
             console.log(action.payload)
             state.instanceState = action.payload
@@ -53,17 +63,6 @@ const userSlice = createSlice({
 
         setError(state, action) {
             state.error = action.payload
-        },
-
-        setUser(state, action) {
-            console.log(action.payload)
-            state.user = action.payload
-
-        },
-
-        setIamUser(state, action) {
-            state.user.accessId = action.payload.accessId
-            state.user.secretId = action.payload.secretId
         },
         
         signOut() {

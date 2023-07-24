@@ -1,0 +1,30 @@
+.auth_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color:rgb(244, 244, 239);
+}
+
+.profile_img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+  border-radius: 30px;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+  margin-left: 10px;
+  border-radius: 30px;
+}
+
+
+/* .button_login {
+  font-family: "Times New Roman", Times, serif;
+} */
+
+
+
+

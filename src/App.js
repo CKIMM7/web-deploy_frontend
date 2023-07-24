@@ -28,31 +28,6 @@ function App() {
     dispatch(userActions.signOut())
   }
 
-  const createAwsUser = () => {
-    axios.post(`${process.env.REACT_APP_URL}/iam/new`, {
-        name: user.name,
-        guid: user.guid
-      }).then((s) => {
-        console.log(s)
-
-        let newUser = { ...user }
-        newUser.access_id = s.data.user.access_id
-        newUser.secret_id = s.data.user.secret_id
-                
-        dispatch(userActions.setUser(newUser))
-
-      }).catch((e) => {
-        console.log(e)
-
-        dispatch(userActions.setError(e.response.data.message))
-        setTimeout(function(){
-        dispatch(userActions.setError(''))
-        }, 3000); 
-
-      })
-  }
-
-  
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_URL}`)

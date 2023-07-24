@@ -12,7 +12,7 @@ export default function Launch() {
   return <div>
 
       {user.access_id ? 
-      <div className="repos">
+      <div>
         <Form></Form>
         <Repos></Repos>
       </div>

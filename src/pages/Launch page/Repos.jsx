@@ -50,16 +50,17 @@ const ec2launchHandler = (clone_url) => {
 
 
   const repos = searchArray.map((repo, i) => {
-    return <div key={i}>
-            <h1>repo name:  {repo.name}</h1>
-            <div id="img"> 
-            <img src={repo.owner.avatar_url} width="400" height="400"></img>
-                <p>{repo.owner.login}</p>
-                <p>stargazer count:{repo.stargazers_count}</p>
-                <p>visibility: {repo.visibility}</p>
-                <a href={repo.html_url} target="_blank">Check It Out</a>
-
-                <p onClick={() => {ec2launchHandler(repo.clone_url)}}> Deploy to AWS NOW!</p>
+    return <div key={i} className={classes.repo}>
+            <div> 
+              <img src={repo.owner.avatar_url} className={classes.repo_img}></img>
+            </div> 
+            <div className={classes.repo_text}>
+              <h3>{repo.name}</h3>
+              <p>{repo.owner.login}</p>
+              <p>stargazer count:{repo.stargazers_count}</p>
+              <p>visibility: {repo.visibility}</p>
+              <a href={repo.html_url} target="_blank">Check It Out</a>
+              <p onClick={() => {ec2launchHandler(repo.clone_url)}}> Deploy to AWS NOW!</p>
             </div>
     </div>
  })

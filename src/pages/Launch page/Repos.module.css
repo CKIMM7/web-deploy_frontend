@@ -1,6 +1,44 @@
 .repos_container {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+.repo {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: 10px;
+
+  width: 500px;
+
+  padding: 10px;
+  box-shadow: 0 3px 10px #a17a69;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+}
+
+.repo_img {
+  align-items: center;
+  width: 150px;
+  height: auto;
+}
+
+.repo_text {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: left;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.repo_text p {
+  margin: 0px;
+}
+
+.repo_text h3 {
+  margin: 0px;
 }
